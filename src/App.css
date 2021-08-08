@@ -1,0 +1,297 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+}
+
+.App{
+  min-height: 100vh;
+  background-image: url('./image/bg-pic.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/*--- header ---*/
+.logo{
+  width: 50px;
+  height: 50px;
+}
+
+header{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1.5em;
+  margin-bottom: 3em;
+}
+
+.nav-unorder{
+  display: flex;
+}
+
+.nav-list{
+  list-style-type: none;
+  padding: 1em;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+/*--- option area ---*/
+.option-area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3em;
+}
+
+.option-wrapper{
+  margin: 0 1em;
+}
+
+.title{
+  font-size: 2em;
+}
+
+.option-section{
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  position: relative;
+}
+
+.display-opt,
+.display-left-option,
+.display-right-option{
+  width: 18em;
+  border: 5px solid rgb(221, 221, 221);
+  border-radius: 5px;
+  padding: 0.3em 0.1em;
+  font-size: 1.6em;
+  margin: 0.5em 0 1.5em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 3px 15px rgba(224, 224, 224, 0.5);
+}
+
+.display-left-option,
+.display-right-option{
+  cursor: pointer;
+}
+
+.display-outside-wrapper{
+  display: flex;
+  font-size: 1em;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flag,
+.left-flag,
+.right-flag{
+  font-size: 1.6em;
+}
+
+.default-option{
+  padding-left: 1.5em;
+  font-size: 1em;
+}
+
+.update-option{
+  font-size: 1em;
+}
+
+#show-btn-left,
+#show-btn-right{
+  cursor: pointer;
+}
+
+.left-options-wrapper,
+.right-options-wrapper{
+  width: 18em;
+  height: 9em;
+  border: 1px solid black;
+  overflow: scroll;
+  font-size: 1.6em;
+  display: none;
+  cursor: pointer;
+}
+
+.showLeft,
+.showRight{
+  display: block;
+  position: absolute;
+  top: 3.3em;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  box-shadow: 0px 5px 15px rgba(224, 224, 224, 0.5);
+}
+
+.country-codes{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75em;
+  font-weight: 700;
+}
+
+.country-codes:hover{
+  background-color: rgba(224, 224, 224, 0.5);
+}
+
+.transfer{
+  border-radius: 50%;
+  padding: 3em;
+  border: 1px solid lightgray;
+  background-color: white;
+  background-image: url('./image/arrow.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 2em;
+  cursor: pointer;
+}
+
+/*--- display amount ---*/
+.amount-wrapper{
+  border-bottom: 1px solid black;
+  padding: 1em;
+  padding-left: 2em;
+  font-size: 1.2em;
+}
+
+.dollar-sign{
+  font-size: 2em;
+}
+
+.amount{
+  border: 0;
+  font-size: 2em;
+  background: transparent;
+  text-align: center
+}
+
+input:focus{
+  outline: none;
+}
+
+.show-rate{
+  font-size: 1.6em;
+  margin-top: 1em;
+}
+
+.amount-section{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/*-- history-rate --*/
+.history-rate{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h2{
+  font-size: 2em;
+  margin: 0.5em;
+  font-weight: 500;
+}
+
+.getDate{
+  margin: 1.5em 0em;
+  padding: 0.5em;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.show-history-rate-left,
+.show-history-rate-right{
+  margin: 0.5em;
+  font-size: 1.6em;
+  display: none;
+}
+
+.show-rate{
+  display: block;
+}
+
+.check-btn{
+  font-size: 1.6em;
+  padding: 0.5em;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0px 5px 15px rgba(224, 224, 224, 0.5);
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+.notice{
+  font-size: 1.3em;
+  color: red;
+  font-weight: 600;
+}
+
+
+
+/*-- Responsive Area --*/
+@media screen and (max-width: 768px){
+  .display-left-option,
+  .display-right-option,
+  .left-options-wrapper,
+  .right-options-wrapper{
+    width: calc(40vw)
+  }
+  .amount-wrapper{
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 570px){
+  .amount-wrapper{
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 425px){
+  header{
+    padding: 1em;
+  }
+
+  .option-area,
+  .display-area{
+    display: block;
+  }
+
+  #rotate{
+    background-image: url('./image/up-down-arrow.png');
+    margin: 2.5em auto 0em auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .display-left-option,
+  .display-right-option,
+  .left-options-wrapper,
+  .right-options-wrapper{
+    width: calc(100%)
+  }
+
+  .amount-wrapper{
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .nav-list{
+    padding: 0.3em;
+  }
+  .amount-wrapper{
+    font-size: 0.95em;
+  }
+}
