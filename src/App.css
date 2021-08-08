@@ -6,6 +6,7 @@
 }
 
 .App{
+  min-width: 100%;
   min-height: 100vh;
   background-image: url('./image/bg-pic.jpg');
   background-position: center;
