@@ -6,7 +6,7 @@
 }
 
 .App{
-  min-width: 100%;
+  min-width: 100vw;
   min-height: 100vh;
   background-image: url('./image/bg-pic.jpg');
   background-position: center;
@@ -158,7 +158,7 @@ header{
 /*--- display amount ---*/
 .amount-wrapper{
   border-bottom: 1px solid black;
-  padding: 1em;
+  padding: 1em 0 1em 1em;
   padding-left: 2em;
   font-size: 1.2em;
 }
