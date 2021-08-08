@@ -57,7 +57,7 @@ const CurrencyProvider = (props) => {
 
     const defaultRate = async() => {
         try{
-            const fetchSource = await axios.get(`https://api.currencylayer.com/live?access_key=${process.env.REACT_APP_API_KEY}`);
+            const fetchSource = await axios.get(`http://api.currencylayer.com/live?access_key=${process.env.REACT_APP_API_KEY}`);
             const fetchResult = fetchSource.data.quotes;
             const defaultInput = document.querySelector("#amount-left").getAttribute("value")
             const defaultRateUSD = fetchResult.USDUSD;
@@ -217,7 +217,7 @@ const CurrencyProvider = (props) => {
 
     const getHistoricalRate = async() => {
         const chooseDate = document.querySelector('.getDate').value;
-        const historyRates = await axios.get(`https://api.currencylayer.com/historical?access_key=${process.env.REACT_APP_API_KEY}&date=${chooseDate.split("-")[0]}-${chooseDate.split("-")[1]}-${chooseDate.split("-")[2]}`);
+        const historyRates = await axios.get(`http://api.currencylayer.com/historical?access_key=${process.env.REACT_APP_API_KEY}&date=${chooseDate.split("-")[0]}-${chooseDate.split("-")[1]}-${chooseDate.split("-")[2]}`);
         const historyResult = historyRates.data.quotes;
         const showRateLeft = document.querySelector(".show-history-rate-left");
         const showRateRight = document.querySelector(".show-history-rate-right");
