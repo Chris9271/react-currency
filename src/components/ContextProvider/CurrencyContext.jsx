@@ -9,22 +9,34 @@ const CurrencyProvider = (props) => {
     const [showList, setShowList] = useState(false);
     const [switchChange, setSwitchChange] = useState(false);
     const [currencies, setCurrencies] = useState([]);
+    const [historyRate, setHistoryRate] = useState([]);
+    const [inputVal, setInputVal] = useState("100.00");
+
     const [defaultSwitch, setDefaultSwitch] = useState({
         dSwitchLeft: null,
         dSwitchRight: null,
         dSwitchResultL: "",
         dSwitchResultR: ""
     })
-    const [inputVal, setInputVal] = useState("100.00");
+
     const [rate, setRate] = useState({
         leftRate: null,
         rightRate: null,
         convertResult: ""
     })
 
-    const [currency, setCurrency] = useState({
-        from: "CAD",
-        to: "USD"
+    const [currencyLeft, setCurrencyLeft] = useState({
+        from: "TWD",
+        fromEmoji: null,
+        fromName: "",
+        fromCode: ""
+    });
+
+    const [currencyRight, setCurrencyRight] = useState({
+        to: "USD",
+        toEmoji: null,
+        toName: "",
+        toCode: ""
     });
 
     const [switchRate, setSwitchRate] = useState({
@@ -35,8 +47,6 @@ const CurrencyProvider = (props) => {
         switchResultAfter: "",
         switchResultBefore: ""
     })
-
-    const [historyRate, setHistoryRate] = useState([]);
 
     const [fromHistoryTo, setFromHistoryTo] = useState({
         from: "",
@@ -50,6 +60,23 @@ const CurrencyProvider = (props) => {
             const sourceData = await axios.get('currency.json');
             const sourceMoney = sourceData.data[0].currencies;
             setCurrencyList(sourceMoney);
+            for(let i = 0; i < sourceMoney.length; i++){
+                if(sourceMoney[i].code === currencyLeft.from){
+                    setCurrencyLeft({
+                        ...currencyLeft,
+                        fromName: sourceMoney[i].name,
+                        fromCode: sourceMoney[i].code,
+                        fromEmoji: sourceMoney[i].emoji
+                    })
+                }else if(sourceMoney[i].code === currencyRight.to){
+                    setCurrencyRight({
+                        ...currencyRight,
+                        toName: sourceMoney[i].name,
+                        toCode: sourceMoney[i].code,
+                        toEmoji: sourceMoney[i].emoji
+                    })
+                }
+            }
         }catch(err){
             console.log(err)
         }
@@ -59,26 +86,36 @@ const CurrencyProvider = (props) => {
         try{
             const fetchSource = await axios.get(`http://api.currencylayer.com/live?access_key=${process.env.REACT_APP_API_KEY}`);
             const fetchResult = fetchSource.data.quotes;
-            const defaultInput = document.querySelector("#amount-left").getAttribute("value")
-            const defaultRateUSD = fetchResult.USDUSD;
-            const defaultRateCAD = fetchResult.USDCAD;
-            setRate({
-                leftRate: (defaultRateUSD/ defaultRateCAD).toFixed(5),
-                rightRate: (defaultRateCAD/ defaultRateUSD).toFixed(5),
-                convertResult: (defaultInput * (defaultRateUSD/ defaultRateCAD)).toFixed(3)
-            })
-            setDefaultSwitch({
-                dSwitchLeft: (defaultRateUSD/ defaultRateCAD).toFixed(5),
-                dSwitchRight: (defaultRateCAD/ defaultRateUSD).toFixed(5),
-                dSwitchResultL: (defaultInput * (defaultRateUSD/ defaultRateCAD)).toFixed(3),
-                dSwitchResultR: (defaultInput * (defaultRateCAD/ defaultRateUSD)).toFixed(3)
-            })
+            const defaultInput = document.querySelector("#amount-left").getAttribute("value");
+            let leftCurrency = document.querySelector(".left-flag").getAttribute('value');
+            let rightCurrency = document.querySelector(".right-flag").getAttribute('value');
+
             let newArr = [];
             // Iterate through an object (with array destructure)
             Object.entries(fetchResult).forEach(([key, value]) => {
                 newArr.push([`${key.slice(3)}`, value]);
                 setCurrencies(newArr)
             })
+
+            for(let i = 0; i < newArr.length; i++){
+                for(let j = 0; j < newArr.length; j++){
+                    if(newArr[i][0] === rightCurrency && newArr[j][0] === leftCurrency){
+                        let defaultRateUSD = newArr[i][1];
+                        let defaultRateTWD = newArr[j][1];
+                        setRate({
+                            leftRate: (defaultRateUSD/ defaultRateTWD).toFixed(5),
+                            rightRate: (defaultRateTWD/ defaultRateUSD).toFixed(5),
+                            convertResult: (defaultInput * (defaultRateUSD/ defaultRateTWD)).toFixed(3)
+                        })
+                        setDefaultSwitch({
+                            dSwitchLeft: (defaultRateUSD/ defaultRateTWD).toFixed(5),
+                            dSwitchRight: (defaultRateTWD/ defaultRateUSD).toFixed(5),
+                            dSwitchResultL: (defaultInput * (defaultRateUSD/ defaultRateTWD)).toFixed(3),
+                            dSwitchResultR: (defaultInput * (defaultRateTWD/ defaultRateUSD)).toFixed(3)
+                        })
+                    }
+                }
+            }
         }catch(err){
             console.log(err)
         }
@@ -87,7 +124,7 @@ const CurrencyProvider = (props) => {
     useEffect(() => {
         currencyData();
         defaultRate();
-    },[])
+    },[currencyLeft.from, currencyRight.to])
 
     const convertRate = (val) => {
         let leftCurrency = document.querySelector(".left-flag").getAttribute('value');
@@ -163,8 +200,8 @@ const CurrencyProvider = (props) => {
     }
 
     const handleLeftCurrency = async(e) => {
-        await setCurrency({ 
-            ...currency,
+        await setCurrencyLeft({ 
+            ...currencyLeft,
             from: e.target.getAttribute('value')
         })   
         let currencyVal = document.querySelector("#amount-left").getAttribute('value');
@@ -172,8 +209,8 @@ const CurrencyProvider = (props) => {
     }
 
     const handleRightCurrency = async(e) => {
-        await setCurrency({ 
-            ...currency,
+        await setCurrencyRight({ 
+            ...currencyRight,
             to: e.target.getAttribute('value')
         });
         let currencyVal = document.querySelector("#amount-left").getAttribute('value');
@@ -189,9 +226,11 @@ const CurrencyProvider = (props) => {
         setSwitchChange(!switchChange);
         const arrow = document.querySelector("#rotate");
         if(!switchChange){
-            setCurrency({
-                from: switchRate.to ? switchRate.to : "USD",
-                to: switchRate.from ? switchRate.from : "CAD"
+            setCurrencyLeft({
+                from: switchRate.to ? switchRate.to : "USD"
+            })
+            setCurrencyRight({
+                to: switchRate.from ? switchRate.from : "TWD"
             })
             setRate({
                 leftRate: switchRate.switchRightRate ? switchRate.switchRightRate : defaultSwitch.dSwitchRight,
@@ -201,8 +240,10 @@ const CurrencyProvider = (props) => {
             arrow.style.transform = "rotate(180deg)"
             arrow.style.transition = ".5s"
         }else{
-            setCurrency({
-                from: switchRate.from ? switchRate.from : "CAD",
+            setCurrencyLeft({
+                from: switchRate.from ? switchRate.from : "TWD"
+            })
+            setCurrencyRight({
                 to: switchRate.to ? switchRate.to : "USD"
             })
             setRate({
@@ -223,11 +264,13 @@ const CurrencyProvider = (props) => {
         const showRateRight = document.querySelector(".show-history-rate-right");
         let leftCurrency = document.querySelector(".left-flag").getAttribute('value');
         let rightCurrency = document.querySelector(".right-flag").getAttribute('value');
+
         let newArr = [];
         Object.entries(historyResult).forEach(([keys, values]) => {
             newArr.push([`${keys.slice(3)}`, values])
             setHistoryRate(newArr)
         })
+
         for(let i = 0; i < historyRate.length; i++){
             for(let j = 0; j < historyRate.length; j++){
                 if(leftCurrency === historyRate[i][0] && rightCurrency === historyRate[j][0]){
@@ -252,7 +295,7 @@ const CurrencyProvider = (props) => {
         // provide values to decendant consumer that using useContext
         <CurrencyContext.Provider 
             value={{
-            currencyList, inputVal, rate, currency, handleLeftOption, handleRightOption,
+            currencyList, inputVal, rate, currencyLeft, currencyRight, handleLeftOption, handleRightOption,
             handleLeftCurrency, handleRightCurrency, handleLeftInput, handleSwitchCurrency,
             getHistoricalRate, fromHistoryTo}}>
             {props.children}

@@ -2,18 +2,18 @@
   {
     "currencies": [
       {
-        "symbol": "€",
-        "name": "Euro",
-        "symbol_native": "€",
-        "code": "EUR",
-        "emoji": "🇪🇺"
-      },
-      {
         "symbol": "$",
         "name": "US Dollar",
         "symbol_native": "$",
         "code": "USD",
         "emoji": "🇺🇸"
+      },
+      {
+        "symbol": "€",
+        "name": "Euro",
+        "symbol_native": "€",
+        "code": "EUR",
+        "emoji": "🇪🇺"
       },
       {
         "symbol": "CA$",

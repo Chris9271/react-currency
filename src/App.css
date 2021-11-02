@@ -6,7 +6,7 @@
 }
 
 .App{
-  min-width: 100vw;
+  /* min-width: 100vw; */
   min-height: 100vh;
   background-image: url('./image/bg-pic.jpg');
   background-position: center;
@@ -23,8 +23,8 @@ header{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1.5em;
-  margin-bottom: 3em;
+  padding: 1.5rem;
+  /* margin-bottom: 3rem; */
 }
 
 .nav-unorder{
@@ -33,43 +33,55 @@ header{
 
 .nav-list{
   list-style-type: none;
-  padding: 1em;
-  font-size: 1.6em;
+  padding: 1.5rem;
+  font-size: 1.6rem;
   cursor: pointer;
 }
 
 /*--- option area ---*/
+.options{
+  /* margin-top: 2rem; */
+  max-width: 960px;
+  margin: 2rem auto 0 auto;
+}
+
 .option-area{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3em;
+  /* margin-bottom: 3em; */
 }
 
 .option-wrapper{
-  margin: 0 1em;
+  margin: 0 1rem;
 }
 
 .title{
-  font-size: 2em;
+  padding: 1rem 1rem 0 1rem;
+  margin: 0;
+  font-size: 2rem;
 }
 
 .option-section{
   display: flex;
   flex-direction: column;
-  margin: 0.5em;
+  padding: 1rem;
   position: relative;
+}
+
+.selected{
+  background-color: rgba(0, 0, 0, 0.1); 
 }
 
 .display-opt,
 .display-left-option,
 .display-right-option{
-  width: 18em;
+  /* width: 18em; */
   border: 5px solid rgb(221, 221, 221);
   border-radius: 5px;
-  padding: 0.3em 0.1em;
-  font-size: 1.6em;
-  margin: 0.5em 0 1.5em 0;
+  padding: 0.5rem 0.16rem;
+  font-size: 1.6rem;
+  margin: 0.8rem 0 1.6rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,24 +95,24 @@ header{
 
 .display-outside-wrapper{
   display: flex;
-  font-size: 1em;
-  justify-content: space-evenly;
+  font-size: 1.6rem;
+  justify-content: space-between;
   align-items: center;
 }
 
 .flag,
 .left-flag,
 .right-flag{
-  font-size: 1.6em;
+  font-size: 2.6rem;
 }
 
-.default-option{
-  padding-left: 1.5em;
-  font-size: 1em;
-}
+/* .default-option{
+  padding-left: 1.5rem;
+  font-size: 1rem;
+} */
 
 .update-option{
-  font-size: 1em;
+  font-size: 1.6rem;
 }
 
 #show-btn-left,
@@ -110,11 +122,11 @@ header{
 
 .left-options-wrapper,
 .right-options-wrapper{
-  width: 18em;
-  height: 9em;
+  width: 28.6rem;
+  height: 14.2rem;
   border: 1px solid black;
   overflow: scroll;
-  font-size: 1.6em;
+  font-size: 1.6rem;
   display: none;
   cursor: pointer;
 }
@@ -123,7 +135,7 @@ header{
 .showRight{
   display: block;
   position: absolute;
-  top: 3.3em;
+  top: 65px;
   z-index: 1;
   background-color: white;
   border: 1px solid white;
@@ -135,8 +147,9 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.75em;
+  font-size: 1.2rem;
   font-weight: 700;
+  padding: 0 1rem;
 }
 
 .country-codes:hover{
@@ -145,31 +158,31 @@ header{
 
 .transfer{
   border-radius: 50%;
-  padding: 3em;
+  padding: 3rem;
   border: 1px solid lightgray;
   background-color: white;
   background-image: url('./image/arrow.png');
   background-repeat: no-repeat;
   background-position: center;
-  margin-top: 2em;
+  /* margin-top: 2rem; */
   cursor: pointer;
 }
 
 /*--- display amount ---*/
 .amount-wrapper{
   border-bottom: 1px solid black;
-  padding: 1em 0 1em 1em;
-  padding-left: 2em;
-  font-size: 1.2em;
+  padding: 1.2rem 0 1.2rem 2.4rem;
+  font-size: 1.2rem;
 }
 
 .dollar-sign{
-  font-size: 2em;
+  font-size: 2.4rem;
+  display: inline-block;
 }
 
 .amount{
   border: 0;
-  font-size: 2em;
+  font-size: 2.4rem;
   background: transparent;
   text-align: center
 }
@@ -179,8 +192,9 @@ input:focus{
 }
 
 .show-rate{
-  font-size: 1.6em;
-  margin-top: 1em;
+  font-size: 1.6rem;
+  margin-top: 0.6rem;
+  padding: 1rem;
 }
 
 .amount-section{
@@ -197,23 +211,23 @@ input:focus{
   align-items: center;
 }
 
-h2{
-  font-size: 2em;
-  margin: 0.5em;
+.history-title{
+  font-size: 2rem;
+  padding: 1rem;
   font-weight: 500;
 }
 
 .getDate{
-  margin: 1.5em 0em;
-  padding: 0.5em;
-  font-size: 1.3em;
+  margin: 2rem 0;
+  padding: 0.7rem;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 
 .show-history-rate-left,
 .show-history-rate-right{
   margin: 0.5em;
-  font-size: 1.6em;
+  font-size: 1.6rem;
   display: none;
 }
 
@@ -222,18 +236,18 @@ h2{
 }
 
 .check-btn{
-  font-size: 1.6em;
-  padding: 0.5em;
+  font-size: 1.6rem;
+  padding: 1rem;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 5px;
   background: white;
   box-shadow: 0px 5px 15px rgba(224, 224, 224, 0.5);
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   cursor: pointer;
 }
 
 .notice{
-  font-size: 1.3em;
+  font-size: 1.3rem;
   color: red;
   font-weight: 600;
 }
@@ -242,30 +256,34 @@ h2{
 
 /*-- Responsive Area --*/
 @media screen and (max-width: 768px){
-  .display-left-option,
-  .display-right-option,
+  .option-area{
+    display: block;
+  }
+
+  #rotate{
+    background-image: url('./image/up-down-arrow.png');
+    display: block;
+    margin: 1rem auto;
+  }
+  /* 將隱藏選單寬度修正為跟顯示區相等 */
   .left-options-wrapper,
   .right-options-wrapper{
-    width: calc(40vw)
-  }
-  .amount-wrapper{
-    font-size: 1em;
+    width: calc(100% - 20px)
   }
 }
 
-@media screen and (max-width: 570px){
+/* @media screen and (max-width: 570px){
   .amount-wrapper{
     font-size: 0.8em;
   }
-}
+} */
 
 @media screen and (max-width: 425px){
-  header{
+  /* header{
     padding: 1em;
   }
 
-  .option-area,
-  .display-area{
+  .option-area{
     display: block;
   }
 
@@ -285,14 +303,28 @@ h2{
 
   .amount-wrapper{
     font-size: 1em;
-  }
+  } */
 }
 
 @media screen and (max-width: 320px){
-  .nav-list{
-    padding: 0.3em;
+  header{
+    padding: 1rem 0.5rem;
   }
+
+  .nav-list{
+    padding: 0.5rem;
+  }
+
+  .amount,
+  .dollar-sign{
+    font-size: 2rem;
+  }
+
   .amount-wrapper{
-    font-size: 0.95em;
+    padding: 1rem 0 1rem 1rem;
+  }
+
+  .history-title{
+    font-size: 1.65rem;
   }
 }
